@@ -1,12 +1,9 @@
-export default function Home() {
+export default function Page() {
   return (
-    <main style={{ backgroundColor: '#000', color: '#ff6600', minHeight: '100vh', padding: '40px', fontFamily: 'sans-serif' }}>
-      <h1>🚀 BR Delivery Express</h1>
-      <p>Central de Operações: Rua Coutinho, 36 - Mangabeira</p>
-      <div style={{ border: '1px solid #ff6600', padding: '20px', marginTop: '20px' }}>
-        <h3>Status do Sistema: ONLINE</h3>
-        <p>Pronto para receber pedidos via WhatsApp.</p>
-      </div>
-    </main>
-  );
+    <div style={{background:'#000', color:'#0f0', height:'100vh', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', fontFamily:'monospace', textAlign:'center'}}>
+      <h1 style={{border:'2px solid #0f0', padding:'20px'}}>BR DELIVERY EXPRESS: ONLINE</h1>
+      <p>SISTEMA PRONTO PARA OPERAÇÃO</p>
+      <a href="/admin/dashboard/teste-final" style={{marginTop:'20px', color:'#000', background:'#0f0', padding:'10px', textDecoration:'none', fontWeight:'bold'}}>ENTRAR NA CENTRAL</a>
+    </div>
+  )
 }
