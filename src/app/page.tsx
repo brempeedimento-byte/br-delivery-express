@@ -1,9 +1,8 @@
 export default function Page() {
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '20px' }}>
-      <h1 style={{ border: '3px solid #0f0', padding: '20px' }}>BR DELIVERY EXPRESS: ONLINE</h1>
-      <p style={{ color: '#fff' }}>SISTEMA REESTRUTURADO. CONFLITOS ELIMINADOS.</p>
-      <a href="/admin/dashboard/teste-final" style={{ marginTop: '20px', color: '#000', background: '#0f0', padding: '15px', textDecoration: 'none', fontWeight: 'bold' }}>ACESSAR CENTRAL</a>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+      <h1>BR DELIVERY EXPRESS: 100% OPERACIONAL</h1>
+      <a href="/admin/dashboard/teste-final" style={{ color: '#0f0' }}>ENTRAR NA CENTRAL</a>
     </div>
   )
 }
