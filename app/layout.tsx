@@ -1,4 +1,4 @@
-export const metadata = { title: 'BR Express - Sistema Oficial' }
+export const metadata = { title: 'BR Express - Oficial' }
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
