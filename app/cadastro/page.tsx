@@ -1,16 +1,32 @@
 'use client';
+import { useState } from 'react';
+import { supabase } from '@/lib/supabase';
+
 export default function Cadastro() {
+  const [form, setForm] = useState({ nome: '', cpf: '', whatsapp: '', cep: '', endereco: '', numero: '' });
+  const [status, setStatus] = useState('');
+
+  const finalizar = async () => {
+    setStatus('Salvando...');
+    const { error } = await supabase.from('clientes').insert([form]);
+    if (error) setStatus('Erro ao cadastrar.');
+    else setStatus('Cadastro concluído! Acessando catálogo...');
+  };
+
   return (
-    <div style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
-      <div style={{ width: '100%', maxWidth: '500px', background: '#111', padding: '40px', borderRadius: '20px', border: '1px solid #333' }}>
-        <h1 style={{ color: '#ceae00', textAlign: 'center', marginBottom: '10px' }}>CADASTRO DE SEGURANÇA</h1>
-        <p style={{ color: '#888', textAlign: '
-
-
-# 1. Instala a biblioteca de conexão com o Banco de Dados
-npm install @supabase/supabase-js
-
-# 2. Configura as chaves de acesso no ambiente (segurança)
-cat <<EOF > .env.local
-NEXT_PUBLIC_SUPABASE_URL=https://senqbifsjqlzremfuphm.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_VS0KfCroScCPQXj-NVbd3w_nvVHYTce
+    <div style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', padding: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ maxWidth: '500px', width: '100%', background: '#111', padding: '30px', borderRadius: '15px' }}>
+        <h2 style={{ color: '#ceae00', textAlign: 'center' }}>CADASTRO SEGURO</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
+          <input placeholder="Nome" onChange={e => setForm({...form, nome: e.target.value})} style={{ padding: '12px', background: '#000', color: '#fff', border: '1px solid #333' }} />
+          <input placeholder="CPF" onChange={e => setForm({...form, cpf: e.target.value})} style={{ padding: '12px', background: '#000', color: '#fff', border: '1px solid #333' }} />
+          <input placeholder="WhatsApp" onChange={e => setForm({...form, whatsapp: e.target.value})} style={{ padding: '12px', background: '#000', color: '#fff', border: '1px solid #333' }} />
+          <input placeholder="CEP" onChange={e => setForm({...form, cep: e.target.value})} style={{ padding: '12px', background: '#000', color: '#fff', border: '1px solid #333' }} />
+          <input placeholder="Endereço" onChange={e => setForm({...form, endereco: e.target.value})} style={{ padding: '12px', background: '#000', color: '#fff', border: '1px solid #333' }} />
+          <button onClick={finalizar} style={{ padding: '20px', background: '#ceae00', color: '#000', fontWeight: 'bold', border: 'none', marginTop: '10px' }}>FINALIZAR CADASTRO</button>
+          <p style={{ textAlign: 'center', color: '#ceae00' }}>{status}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
