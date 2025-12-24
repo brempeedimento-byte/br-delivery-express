@@ -1,36 +1,38 @@
 'use client';
 import { useState } from 'react';
-import { ShieldCheck, TrendingUp, Factory, Truck, Star, AlertTriangle } from 'lucide-react';
+import { MessageSquare, Mic, Cpu, CheckCircle } from 'lucide-react';
 
-export default function TorreSuprema() {
+export default function TorreWhatsAppIA() {
   return (
-    <div style={{ background: '#000', minHeight: '100vh', color: '#fff', padding: '20px', fontFamily: 'sans-serif' }}>
-      <header style={{ borderBottom: '2px solid #ceae00', paddingBottom: '10px', marginBottom: '20px' }}>
-        <h1 style={{ color: '#ceae00', fontSize: '1.2rem' }}>BR EXPRESS | COMANDO GERAL</h1>
+    <div style={{ background: '#000', minHeight: '100vh', color: '#fff', padding: '20px' }}>
+      <header style={{ borderBottom: '2px solid #ceae00', paddingBottom: '15px' }}>
+        <h1 style={{ color: '#ceae00', fontSize: '1.2rem' }}>BR EXPRESS | CONTROLE DE IA</h1>
       </header>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-        <div style={cardFinanceiro}>
-          <TrendingUp color="#0f0" />
-          <small>LUCRO TORRE (HOJE)</small>
-          <h2 style={{ color: '#0f0' }}>R$ 15.420</h2>
+      {/* STATUS DO ROBÔ NO WHATSAPP */}
+      <div style={{ background: '#111', padding: '20px', borderRadius: '15px', marginTop: '20px', border: '1px solid #ceae00' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Cpu color="#0f0" className="animate-pulse" />
+          <h3 style={{ margin: 0 }}>ROBÔ CONVERSACIONAL ATIVO</h3>
         </div>
-        <div style={cardFinanceiro}>
-          <ShieldCheck color="#ceae00" />
-          <small>APROVAÇÕES</small>
-          <h2>03 PENDENTES</h2>
-        </div>
+        <p style={{ fontSize: '12px', color: '#888' }}>Interpretando Áudios e Pedidos via API WhatsApp</p>
       </div>
 
-      <h3 style={{ marginTop: '30px' }}>RELATÓRIOS DE PERFORMANCE</h3>
-      <div style={{ background: '#111', padding: '15px', borderRadius: '12px', marginTop: '10px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <span>ATACADÃO CENTRAL</span>
-          <span style={{ color: '#ceae00' }}><Star size={12} fill="#ceae00"/> 4.8</span>
-        </div>
-        <div style={{ fontSize: '10px', color: '#888', marginTop: '5px' }}>Vendas: 1.240 | Reclamações: 0</div>
+      <h3 style={{ marginTop: '30px' }}>ÚLTIMAS INTERAÇÕES DO ROBÔ</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {[1, 2].map(i => (
+          <div key={i} style={{ background: '#111', padding: '15px', borderRadius: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
+              <span style={{ color: '#ceae00' }}><Mic size={14}/> Áudio Interpretado</span>
+              <span style={{ color: '#555' }}>há 2 min</span>
+            </div>
+            <p style={{ fontSize: '14px', margin: '10px 0' }}>"Quero 2 fardos de água e 1 carvão..."</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#0f0', fontSize: '11px' }}>
+              <CheckCircle size={12} /> Carrinho gerado: R$ 42,00 + Frete
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-const cardFinanceiro = { background: '#111', padding: '20px', borderRadius: '15px', borderLeft: '5px solid #ceae00' };
