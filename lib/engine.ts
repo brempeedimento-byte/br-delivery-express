@@ -1,18 +1,18 @@
-export const calcularTudo = (distanciaKm: number, valorProdutos: number) => {
-  // Regra de Frete
-  let freteBruto = distanciaKm <= 7 ? 12.00 : distanciaKm <= 14 ? 20.00 : distanciaKm * 1.50;
+export const calcularFluxoFinanceiro = (distanciaKm: number, valorProdutos: number) => {
+  // Regra de Frete (7km = 12, 14km = 20)
+  const freteBruto = distanciaKm <= 7 ? 12.00 : distanciaKm <= 14 ? 20.00 : distanciaKm * 1.50;
   
-  // Splits Financeiros (Taxas)
-  const lucroTorreFrete = freteBruto * 0.20; // Sua taxa de 20%
-  const repasseEntregador = freteBruto - lucroTorreFrete;
-  const lucroTorreProduto = valorProdutos * 0.10; // Sua comissão de 10%
-  const repasseFornecedor = valorProdutos - lucroTorreProduto;
-
+  // Sua Taxa de 20% sobre o frete + 10% sobre o produto
+  const lucroTorreFrete = freteBruto * 0.20;
+  const lucroTorreProduto = valorProdutos * 0.10;
+  
   return {
     totalCliente: valorProdutos + freteBruto,
     frete: freteBruto,
-    lucroTotalTorre: lucroTorreFrete + lucroTorreProduto,
-    repasseEntregador,
-    repasseFornecedor
+    repasseEntregador: freteBruto - lucroTorreFrete,
+    repasseFornecedor: valorProdutos - lucroTorreProduto,
+    lucroLiquidoTorre: lucroTorreFrete + lucroTorreProduto
   };
 };
+
+export const saudacaoIA = "Olá! Bem-vindo à BR DELIVERY EXPRESS. 🚀\nEstou pronto para ouvir seu áudio ou ler seu pedido. Já tenho seus dados, pode pedir!";

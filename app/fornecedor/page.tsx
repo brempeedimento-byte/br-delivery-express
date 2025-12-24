@@ -6,23 +6,24 @@ export default function PortalFornecedor() {
   const [status, setStatus] = useState('cadastro');
   return (
     <div style={{ background: '#000', minHeight: '100vh', color: '#fff', padding: '20px' }}>
-      <h2 style={{ color: '#ceae00' }}>CREDENCIAMENTO FORNECEDOR</h2>
+      <h2 style={{ color: '#ceae00' }}>CADASTRO DE FORNECEDOR</h2>
       {status === 'cadastro' ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <input placeholder="Nome da Empresa" style={inStyle} />
-          <div style={{ border: '2px dashed #333', padding: '30px', textAlign: 'center' }}>
-            <Camera color="#ceae00" /><br/><small>FOTO DA FACHADA PARA VALIDAÇÃO</small>
+        <div style={{ background: '#111', padding: '20px', borderRadius: '15px' }}>
+          <input placeholder="Nome da Loja" style={inP} />
+          <div style={{ border: '2px dashed #333', padding: '30px', textAlign: 'center', margin: '15px 0' }}>
+            <Camera color="#ceae00" /><br/><small>FOTO DA FACHADA (OBRIGATÓRIO)</small>
           </div>
-          <button onClick={() => setStatus('analise')} style={{ padding: '15px', background: '#ceae00', border: 'none', fontWeight: 'bold' }}>ENVIAR PARA APROVAÇÃO BR EXPRESS</button>
+          <button onClick={() => setStatus('analise')} style={btnG}>ENVIAR PARA A TORRE</button>
         </div>
       ) : (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
           <Lock size={50} color="#ceae00" />
-          <h3>AGUARDANDO APROVAÇÃO DA TORRE</h3>
-          <p style={{ color: '#666' }}>Verificamos sua identidade e localização em até 24h.</p>
+          <h3>SISTEMA EM ANÁLISE</h3>
+          <p style={{ color: '#888' }}>Sua fachada e localização estão sendo verificadas.</p>
         </div>
       )}
     </div>
   );
 }
-const inStyle = { padding: '15px', background: '#111', border: '1px solid #333', color: '#fff', borderRadius: '8px' };
+const inP = { width: '100%', padding: '12px', background: '#000', border: '1px solid #333', color: '#fff' };
+const btnG = { width: '100%', padding: '15px', background: '#ceae00', fontWeight: 'bold', border: 'none' };

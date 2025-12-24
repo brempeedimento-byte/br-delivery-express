@@ -1,33 +1,25 @@
 'use client';
-import { BarChart, MessageSquare, Globe, TrendingUp } from 'lucide-react';
+import { ShieldCheck, TrendingUp, Truck, Factory, Star, MessageSquare } from 'lucide-react';
 
-export default function TorreVendasDual() {
+export default function TorreGeral() {
   return (
     <div style={{ background: '#000', minHeight: '100vh', color: '#fff', padding: '20px' }}>
-      <h1 style={{ color: '#ceae00' }}>BR EXPRESS | CANAIS DE VENDA</h1>
+      <h1 style={{ color: '#ceae00', fontSize: '1.2rem', borderBottom: '1px solid #ceae00', paddingBottom: '10px' }}>BR EXPRESS | COMANDO GERAL</h1>
       
-      <div style={{ display: 'grid', gap: '20px', marginTop: '20px' }}>
-        <div style={cardCanal}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span><Globe size={18} color="#ceae00"/> Vendas Web (Feira)</span>
-            <b style={{ color: '#ceae00' }}>65%</b>
-          </div>
-          <div style={{ background: '#222', height: '8px', borderRadius: '10px', marginTop: '10px' }}>
-            <div style={{ background: '#ceae00', width: '65%', height: '100%', borderRadius: '10px' }}></div>
-          </div>
-        </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '20px' }}>
+        <div style={cardF}><TrendingUp color="#0f0" /> <small>LUCRO TORRE</small><h3>R$ 15.420</h3></div>
+        <div style={cardF}><MessageSquare color="#25D366" /> <small>PEDIDOS IA</small><h3>842</h3></div>
+      </div>
 
-        <div style={cardCanal}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span><MessageSquare size={18} color="#25D366"/> Vendas WhatsApp (IA Urgente)</span>
-            <b style={{ color: '#25D366' }}>35%</b>
-          </div>
-          <div style={{ background: '#222', height: '8px', borderRadius: '10px', marginTop: '10px' }}>
-            <div style={{ background: '#25D366', width: '35%', height: '100%', borderRadius: '10px' }}></div>
-          </div>
+      <h3 style={{ marginTop: '30px' }}>RELATÓRIO DE AUDITORIA</h3>
+      <div style={{ background: '#111', padding: '15px', borderRadius: '10px', borderLeft: '4px solid #ceae00' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <b>Atacadão Central</b>
+          <span><Star size={12} fill="#ceae00" /> 4.9</span>
         </div>
+        <small style={{ color: '#888' }}>Vendas: 450 | Reclamações: 0</small>
       </div>
     </div>
   );
 }
-const cardCanal = { background: '#111', padding: '20px', borderRadius: '15px', border: '1px solid #333' };
+const cardF = { background: '#111', padding: '15px', borderRadius: '15px', border: '1px solid #222' };
