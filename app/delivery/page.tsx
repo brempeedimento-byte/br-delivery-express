@@ -1,46 +1,43 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
-import { calcularTudo } from '../../lib/engine';
-import { Star, Truck, ShieldCheck, MapPin } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { MessageCircle, ShoppingBag, Wine, Zap } from 'lucide-react';
 
-export default function MarketplaceSoberano() {
-  const [ponteiro, setPonteiro] = useState(0);
-  const marcas = useMemo(() => Array.from({ length: 100 }, (_, i) => ({ n: i === 0 ? "Coca-Cola" : `Marca ${i+1}` })), []);
-  const dados = calcularTudo(7, 100); // Exemplo: 7km, R$ 100 em produtos
-
-  useEffect(() => {
-    const t = setInterval(() => setPonteiro(p => (p + 1) % 400), 6000);
-    return () => clearInterval(t);
-  }, []);
-
+export default function MarketplaceDual() {
   return (
-    <div style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: 'sans-serif' }}>
-      {/* FAIXA ADS 2CM */}
-      <div style={{ height: '75px', background: '#ceae00', color: '#000', position: 'sticky', top: 0, zIndex: 100, display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'hidden' }}>
-        <marquee scrollamount="10" style={{ fontWeight: '900' }}>
-          🔥 {marcas[Math.floor(ponteiro/4)].n.toUpperCase()} - OFERTA EXCLUSIVA | CARD {(ponteiro%4)+1}/4
-        </marquee>
-        <div style={{ position: 'absolute', bottom: '2px', right: '5px', fontSize: '10px', background: '#000', color: '#ceae00', padding: '2px 5px', fontWeight: 'bold' }}>
-          BR DELIVERY EXPRESS ®
-        </div>
+    <div style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: 'sans-serif', position: 'relative' }}>
+      
+      {/* FAIXA ADS 2CM (MONETIZAÇÃO) */}
+      <div style={{ height: '70px', background: '#ceae00', color: '#000', display: 'flex', alignItems: 'center', fontWeight: '900', overflow: 'hidden' }}>
+        <marquee>🔥 BR EXPRESS ADS: ANÚNCIOS DAS MARCAS 24H RODANDO...</marquee>
       </div>
 
       <main style={{ padding: '20px' }}>
-        <div style={{ background: '#111', padding: '20px', borderRadius: '15px', border: '1px solid #222' }}>
-          <h2 style={{ color: '#ceae00' }}>RESUMO DA COMPRA</h2>
-          <p>Produtos: R$ 100,00</p>
-          <p style={{ color: '#0f0' }}>Frete (7km): R$ {dados.frete.toFixed(2)}</p>
-          <hr style={{ borderColor: '#333' }} />
-          <h3>TOTAL: R$ {dados.totalCliente.toFixed(2)}</h3>
-          <button style={{ width: '100%', padding: '15px', background: '#ceae00', border: 'none', borderRadius: '8px', fontWeight: 'bold' }}>PAGAR AGORA</button>
-        </div>
-
-        {/* ÁREA DE AVALIAÇÃO */}
-        <div style={{ marginTop: '20px', padding: '15px', background: '#0a0a0a', borderRadius: '10px', border: '1px solid #333' }}>
-          <small>AVALIE SUA ENTREGA:</small>
-          <div style={{ display: 'flex', gap: '5px', marginTop: '5px' }}>{[1,2,3,4,5].map(i => <Star key={i} size={16} color="#ceae00" />)}</div>
+        <h2 style={{ color: '#ceae00' }}>VITRINE DE ABASTECIMENTO</h2>
+        <p style={{ fontSize: '12px', color: '#888' }}>Ideal para sua feira, escolha com calma os melhores itens.</p>
+        
+        {/* SIMULAÇÃO DE VITRINE DETALHADA */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '20px' }}>
+          <div style={cardProduto}><Wine size={40} color="#ceae00" /><br/>Vinhos</div>
+          <div style={cardProduto}><ShoppingBag size={40} color="#ceae00" /><br/>Feira Semanal</div>
         </div>
       </main>
+
+      {/* 🟢 BOTÃO FLUTUANTE WHATSAPP IA (URGÊNCIA) */}
+      <a 
+        href="https://wa.me/SEUNUMERO" 
+        style={{
+          position: 'fixed', bottom: '20px', right: '20px', 
+          background: '#25D366', color: '#fff', padding: '15px', 
+          borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '10px',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.5)', textDecoration: 'none', zIndex: 1000
+        }}
+      >
+        <Zap size={20} fill="#fff" />
+        <span style={{ fontWeight: 'bold' }}>COMPRA RÁPIDA (IA)</span>
+        <MessageCircle size={24} />
+      </a>
     </div>
   );
 }
+
+const cardProduto = { background: '#111', height: '150px', borderRadius: '15px', border: '1px solid #222', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontSize: '14px' };
