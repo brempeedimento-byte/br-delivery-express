@@ -1,10 +1,10 @@
 'use client';
 export default function Home() {
   const perfis = [
-    { nome: 'SHOPPING / DELIVERY', desc: 'Dropshipping Web Integrado', link: '/delivery', destaque: true },
-    { nome: 'INVESTIDORES', desc: 'Gestão de Cotas e Capital', link: '/investidor', destaque: true },
+    { nome: 'SHOPPING / DELIVERY', desc: 'Mercado & Hortifruti Web', link: '/delivery', destaque: true },
+    { nome: 'INVESTIDORES', desc: 'Painel de Cotas e Capital', link: '/investidor', destaque: true },
     { nome: 'ENTREGADORES', desc: 'Logística e Distribuição', link: '/entregador', destaque: false },
-    { nome: 'FORNECEDORES', desc: 'Estoque e Suprimentos', link: '/fornecedor', destaque: false }
+    { nome: 'FORNECEDORES', desc: 'Parcerias e Suprimentos', link: '/fornecedor', destaque: false }
   ];
 
   return (
@@ -26,10 +26,7 @@ export default function Home() {
           </a>
         ))}
       </div>
-
-      <footer style={{ marginTop: '50px', color: '#333', fontSize: '0.7rem' }}>
-        BR EMPREENDIMENTOS EXPRESS © 2025 | TECNOLOGIA INTEGRADA
-      </footer>
+      <footer style={{ marginTop: '50px', color: '#333', fontSize: '0.7rem' }}>BR EMPREENDIMENTOS EXPRESS © 2025</footer>
     </div>
   );
 }
