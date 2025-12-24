@@ -1,65 +1,67 @@
 'use client';
 import { useState } from 'react';
-import { ShoppingCart, Search } from 'lucide-react';
+import { ChevronLeft, ShoppingCart, ArrowLeft, CheckCircle } from 'lucide-react';
 
-export default function Marketplace() {
-  const [cat, setCat] = useState('Hortifruti');
-  const [cart, setCart] = useState([]);
+export default function DeliveryMaster() {
+  const [nivel, setNivel] = useState('segmento'); 
+  const [segAtivo, setSegAtivo] = useState(null);
+  const [corAtivo, setCorAtivo] = useState(null);
+  const [carrinho, setCarrinho] = useState([]);
+  const [pago, setPago] = useState(false);
 
-  const prateleiras = {
-    'Hortifruti': [
-      { id: 1, n: 'Banana Prata', p: '7.50', ref: 'Fazenda BR', img: '🍌' },
-      { id: 2, n: 'Tomate Italiano', p: '9.20', ref: 'Orgânico VIP', img: '🍅' },
-      { id: 3, n: 'Alface Crespa', p: '3.50', ref: 'Hidropônica', img: '🥬' }
-    ],
-    'Mercearia': [
-      { id: 4, n: 'Arroz Branco 5kg', p: '28.90', ref: 'Marca Prata', img: '🌾' },
-      { id: 5, n: 'Arroz Integral 5kg', p: '32.00', ref: 'Marca Ouro', img: '🌾' },
-      { id: 6, n: 'Feijão Carioca 1kg', p: '8.40', ref: 'Kicaldo', img: '🫘' }
-    ],
-    'Bebidas': [
-      { id: 7, n: 'Água 500ml', p: '2.50', ref: 'Indaiá', img: '💧' },
-      { id: 8, n: 'Suco de Laranja 1L', p: '12.00', ref: 'Natural BR', img: '🍊' }
-    ]
+  const dados = {
+    'ALIMENTAÇÃO': {
+      'FRIOS': [{id:1, n:'Mussarela 200g', p:14.5, ref:'Sadia'}, {id:2, n:'Presunto 200g', p:12.9, ref:'Perdigão'}],
+      'UTENSÍLIOS': [{id:3, n:'Talheres Set', p:45, ref:'Tramontina'}],
+      'MERCEARIA': [{id:4, n:'Arroz 5kg', p:29.9, ref:'Tio João'}]
+    },
+    'HORTIFRUTI': {
+      'FRUTAS': [{id:5, n:'Banana Kg', p:7.5, ref:'Fazenda'}],
+      'LEGUMES': [{id:6, n:'Tomate Kg', p:9.2, ref:'Premium'}]
+    },
+    'BEBIDAS': {
+      'REFRIGERANTES': [{id:7, n:'Coca 2L', p:11, ref:'Coca'}],
+      'SUCOS': [{id:8, n:'Suco 1L', p:14, ref:'Natural'}]
+    }
   };
 
-  const add = (item) => setCart([...cart, item]);
-  const total = cart.reduce((acc, i) => acc + parseFloat(i.p), 0).toFixed(2);
+  const total = carrinho.reduce((acc, i) => acc + i.p, 0).toFixed(2);
+
+  if (pago) return (
+    <div style={{background:'#000', height:'100vh', color:'#fff', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'20px'}}>
+      <CheckCircle size={80} color="#ceae00" />
+      <h1 style={{color:'#ceae00'}}>PAGAMENTO AGUARDADO</h1>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=PIX_BR_EXPRESS" style={{margin:'20px', border:'5px solid #fff'}} />
+      <p>O pedido foi enviado para o fornecedor e entregador.</p>
+      <button onClick={()=>window.location.href='/'} style={{background:'#ceae00', padding:'15px 30px', border:'none', fontWeight:'bold', marginTop:'20px'}}>VOLTAR</button>
+    </div>
+  );
 
   return (
-    <div style={{ background: '#f5f5f5', minHeight: '100vh', color: '#000', fontFamily: 'sans-serif' }}>
-      <header style={{ background: '#000', color: '#ceae00', padding: '15px', position: 'sticky', top: 0, zIndex: 10, display: 'flex', justifyContent: 'space-between' }}>
-        <h2 style={{ margin: 0 }}>BR DELIVERY</h2>
-        <div style={{ fontWeight: 'bold' }}>🛒 R$ {total}</div>
+    <div style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: 'sans-serif' }}>
+      <header style={{ padding: '20px', borderBottom: '1px solid #ceae00', display: 'flex', alignItems: 'center', gap: '15px', position:'sticky', top:0, background:'#000', zIndex:10 }}>
+        {nivel !== 'segmento' && <ArrowLeft onClick={() => nivel === 'produto' ? setNivel('corredor') : setNivel('segmento')} style={{color:'#ceae00'}} />}
+        <h2 style={{color:'#ceae00', margin:0}}>{nivel === 'segmento' ? 'BR SHOPPING' : (nivel === 'corredor' ? segAtivo : corAtivo)}</h2>
       </header>
 
-      <div style={{ display: 'flex', overflowX: 'auto', background: '#fff', padding: '10px', gap: '10px' }}>
-        {Object.keys(prateleiras).map(c => (
-          <button key={c} onClick={() => setCat(c)} style={{ padding: '8px 20px', borderRadius: '20px', border: cat === c ? 'none' : '1px solid #ddd', background: cat === c ? '#ceae00' : '#fff', fontWeight: 'bold' }}>{c}</button>
-        ))}
-      </div>
-
       <main style={{ padding: '15px' }}>
-        <h3>{cat}</h3>
-        {prateleiras[cat].map(p => (
-          <div key={p.id} style={{ background: '#fff', padding: '15px', borderRadius: '12px', marginBottom: '10px', display: 'flex', alignItems: 'center', border: '1px solid #eee' }}>
-            <span style={{ fontSize: '30px' }}>{p.img}</span>
-            <div style={{ flex: 1, marginLeft: '15px' }}>
-              <div style={{ fontWeight: 'bold' }}>{p.n}</div>
-              <div style={{ fontSize: '0.8rem', color: '#888' }}>{p.ref}</div>
-              <div style={{ color: '#ceae00', fontWeight: 'bold' }}>R$ {p.p}</div>
-            </div>
-            <button onClick={() => add(p)} style={{ background: '#000', color: '#ceae00', border: 'none', borderRadius: '50%', width: '35px', height: '35px', fontWeight: 'bold' }}>+</button>
+        {nivel === 'segmento' && Object.keys(dados).map(s => (
+          <div key={s} onClick={()=>{setSegAtivo(s); setNivel('corredor');}} style={cardStyle}>{s} <ChevronLeft style={{transform:'rotate(180deg)'}} color="#ceae00" /></div>
+        ))}
+        {nivel === 'corredor' && Object.keys(dados[segAtivo]).map(c => (
+          <div key={c} onClick={()=>{setCorAtivo(c); setNivel('produto');}} style={cardStyle}>{c} <ChevronLeft style={{transform:'rotate(180deg)'}} color="#ceae00" /></div>
+        ))}
+        {nivel === 'produto' && dados[segAtivo][corAtivo].map(p => (
+          <div key={p.id} style={cardStyle}>
+            <div>{p.n} <br/><small style={{color:'#555'}}>{p.ref} - R$ {p.p}</small></div>
+            <button onClick={()=>setCarrinho([...carrinho, p])} style={{background:'#ceae00', border:'none', padding:'5px 15px', borderRadius:'5px', fontWeight:'bold'}}>+</button>
           </div>
         ))}
+        {carrinho.length > 0 && nivel === 'segmento' && (
+          <button onClick={()=>setPago(true)} style={{width:'100%', padding:'20px', background:'#ceae00', fontWeight:'bold', borderRadius:'10px', marginTop:'20px'}}>CONCLUIR PEDIDO (R$ {total})</button>
+        )}
       </main>
-
-      {cart.length > 0 && (
-        <div style={{ position: 'fixed', bottom: 20, width: '90%', left: '5%', background: '#000', padding: '15px', borderRadius: '10px', display: 'flex', justifyContent: 'space-between', color: '#fff' }}>
-          <span>Total: R$ {total}</span>
-          <button style={{ background: '#ceae00', border: 'none', padding: '5px 15px', fontWeight: 'bold', borderRadius: '5px' }}>FINALIZAR</button>
-        </div>
-      )}
     </div>
   );
 }
+const cardStyle = { background:'#111', padding:'20px', borderRadius:'12px', border:'1px solid #222', display:'flex', justifyContent:'space-between', marginBottom:'10px', alignItems:'center' };
